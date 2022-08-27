@@ -2,8 +2,8 @@
 // Created by SP on 2022/7/12.
 //
 
-#ifndef TASKS_H
-#define TASKS_H
+#ifndef SERIES_H
+#define SERIES_H
 
 struct node {
     void (*f)();
@@ -12,24 +12,24 @@ struct node {
     node *next;
 };
 
-class TASKS {
+class Series {
 private:
     node left = {[]() {}, nullptr, nullptr};
     node right = {[]() {}, nullptr, nullptr};
 public:
-    TASKS();
+    Series();
 
     void add(void (*f)());
 
     void run();
 };
 
-TASKS::TASKS() {
+Series::Series() {
     this->left.next = &this->right;
     this->right.last = &this->left;
 }
 
-void TASKS::add(void (*f)()) {
+void Series::add(void (*f)()) {
     node *cur = new node();
     cur->f = f;
     this->right.last->next = cur;
@@ -38,7 +38,7 @@ void TASKS::add(void (*f)()) {
     this->right.last = cur;
 }
 
-void TASKS::run() {
+void Series::run() {
     node *cur = this->left.next;
     while (cur != &this->right) {
         cur->f();
@@ -47,4 +47,4 @@ void TASKS::run() {
 }
 
 
-#endif //TASKS_H
+#endif //SERIES_H
