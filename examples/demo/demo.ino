@@ -1,6 +1,6 @@
-#include "../../src/tasks.h"
+#include <Series.h>
 
-TASKS loopTasks;
+Series loopTasks;
 
 void task();
 
